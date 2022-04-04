@@ -5,6 +5,10 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "typesense-Playground", "typesense-Playground\typesense-Playground.csproj", "{F7F91E76-0708-4CFF-8A51-C7E098700E47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "typesense.domain", "typesense.domain\typesense.domain.csproj", "{5247BBB8-7537-4CB5-8B1C-940547564601}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "typesense.domain.Tests", "typesense.domain.Tests\typesense.domain.Tests.csproj", "{26432EF0-6EFB-421C-8642-9DCBC5B77981}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F7F91E76-0708-4CFF-8A51-C7E098700E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7F91E76-0708-4CFF-8A51-C7E098700E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7F91E76-0708-4CFF-8A51-C7E098700E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5247BBB8-7537-4CB5-8B1C-940547564601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5247BBB8-7537-4CB5-8B1C-940547564601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5247BBB8-7537-4CB5-8B1C-940547564601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5247BBB8-7537-4CB5-8B1C-940547564601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26432EF0-6EFB-421C-8642-9DCBC5B77981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26432EF0-6EFB-421C-8642-9DCBC5B77981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26432EF0-6EFB-421C-8642-9DCBC5B77981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26432EF0-6EFB-421C-8642-9DCBC5B77981}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
