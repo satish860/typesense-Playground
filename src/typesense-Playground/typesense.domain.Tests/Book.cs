@@ -14,9 +14,10 @@ namespace typesense.domain.Tests
 
         public string Title { get; set; }
 
-        
+        [Facet]
         public string[] Authors { get; set; }
 
+        [Facet]
         public DateTime PublicationYears { get; set; }
 
         public int RatingCount { get; set; }

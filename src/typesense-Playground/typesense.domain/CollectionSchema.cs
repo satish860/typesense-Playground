@@ -18,9 +18,10 @@ namespace typesense.domain
             this.type = type;
         }
 
-        public IndexSchema GetDocumentDetails()
+        public IndexSchema GetDocumentDetails(IndexSchema indexSchema = default(IndexSchema))
         {
-            IndexSchema indexSchema = new IndexSchema();
+            if (indexSchema == null)
+                indexSchema = new IndexSchema();
             DocumentAttribute? Attribute = type.GetCustomAttributes(typeof(DocumentAttribute), true).FirstOrDefault() as DocumentAttribute;
             if (Attribute != null)
             {
@@ -30,8 +31,34 @@ namespace typesense.domain
                 else
                     indexSchema.IndexName = type.Name.Pluralize().ToSnakeCase();
             }
-            
+
             return indexSchema;
+        }
+
+        public IndexSchema GetFields(IndexSchema schema)
+        {
+            List<Field> fields = new List<Field>();
+            foreach (var item in type.GetProperties())
+            {
+                Field field = new Field();
+                field.Name = item.Name.ToSnakeCase();
+                field.Type = GetTypeSenseProperty(item.PropertyType.Name);
+                var attribute = item.GetCustomAttributes(typeof(FacetAttribute), false).FirstOrDefault();
+                if (attribute != null)
+                    field.Facet = true;
+                fields.Add(field);
+            }
+            schema.Fields = fields;
+            return schema;
+        }
+
+        public string GetTypeSenseProperty(string name)
+        {
+            if (name == typeof(DateTime).Name)
+                return typeof(int).Name;
+            if (name == typeof(decimal).Name)
+                return "float";
+            return name;
         }
     }
 }

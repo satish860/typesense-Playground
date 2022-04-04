@@ -12,6 +12,7 @@ namespace typesense.domain
 
         public string DefaultSortingField { get; set; }
 
+        public IEnumerable<Field> Fields { get; set; }
 
     }
 }

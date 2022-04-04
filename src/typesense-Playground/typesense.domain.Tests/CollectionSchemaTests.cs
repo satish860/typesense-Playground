@@ -1,3 +1,4 @@
+using System.Linq;
 using Xunit;
 
 namespace typesense.domain.Tests
@@ -11,6 +12,16 @@ namespace typesense.domain.Tests
             IndexSchema schema = curator.GetDocumentDetails();
             Assert.Equal("books", schema.IndexName);
             Assert.Equal("rating_count", schema.DefaultSortingField);
+        }
+
+        [Fact]
+        public void Should_Be_Able_Get_The_Fields_from_the_Document()
+        {
+            CollectionSchema curator = new CollectionSchema(typeof(Book));
+            IndexSchema schema = curator.GetFields(new IndexSchema());
+            Assert.Equal(6, schema.Fields.Count());
+            Assert.True(schema.Fields.First(p => p.Name == "authors").Facet);
+            Assert.Equal("Int32", schema.Fields.First(p => p.Name == "publication_years").Type);
         }
     }
 }
