@@ -10,9 +10,9 @@ namespace typesense.domain
     {
         public string Name { get; set; }
 
-        public string DefaultSortingField { get; set; }
+        public string? DefaultSortingField { get; set; }
 
-        public IEnumerable<Field> Fields { get; set; }
+        public IEnumerable<Field> Fields { get; set; } = Enumerable.Empty<Field>();
 
     }
 }

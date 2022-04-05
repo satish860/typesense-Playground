@@ -18,6 +18,14 @@ namespace typesense.domain
             this.type = type;
         }
 
+        public IndexSchema CreateIndex()
+        {
+            IndexSchema schema = new IndexSchema();
+            schema = GetDocumentDetails(schema);
+            schema = GetFields(schema);
+            return schema;
+        }
+
         public IndexSchema GetDocumentDetails(IndexSchema indexSchema = default(IndexSchema))
         {
             if (indexSchema == null)
@@ -42,7 +50,7 @@ namespace typesense.domain
             {
                 Field field = new Field();
                 field.Name = item.Name.ToSnakeCase();
-                field.Type = GetTypeSenseProperty(item.PropertyType.Name);
+                field.Type = GetTypeSenseProperty(item.PropertyType.Name).ToLower();
                 var attribute = item.GetCustomAttributes(typeof(FacetAttribute), false).FirstOrDefault();
                 if (attribute != null)
                     field.Facet = true;
