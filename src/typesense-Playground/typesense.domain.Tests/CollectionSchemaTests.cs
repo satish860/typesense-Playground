@@ -10,7 +10,7 @@ namespace typesense.domain.Tests
         {
             CollectionSchema curator = new CollectionSchema(typeof(Book));
             IndexSchema schema = curator.GetDocumentDetails();
-            Assert.Equal("books", schema.IndexName);
+            Assert.Equal("books", schema.Name);
             Assert.Equal("rating_count", schema.DefaultSortingField);
         }
 

@@ -8,7 +8,7 @@ namespace typesense.domain
 {
     public class IndexSchema
     {
-        public string IndexName { get; set; }
+        public string Name { get; set; }
 
         public string DefaultSortingField { get; set; }
 

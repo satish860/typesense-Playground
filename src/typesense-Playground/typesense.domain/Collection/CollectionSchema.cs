@@ -26,10 +26,10 @@ namespace typesense.domain
             if (Attribute != null)
             {
                 indexSchema.DefaultSortingField = Attribute.DefaultSortingField.ToSnakeCase();
-                if (indexSchema.IndexName != null)
-                    indexSchema.IndexName = indexSchema.IndexName.ToSnakeCase();
+                if (indexSchema.Name != null)
+                    indexSchema.Name = indexSchema.Name.ToSnakeCase();
                 else
-                    indexSchema.IndexName = type.Name.Pluralize().ToSnakeCase();
+                    indexSchema.Name = type.Name.Pluralize().ToSnakeCase();
             }
 
             return indexSchema;
@@ -52,7 +52,7 @@ namespace typesense.domain
             return schema;
         }
 
-        public string GetTypeSenseProperty(string name)
+        private string GetTypeSenseProperty(string name)
         {
             if (name == typeof(DateTime).Name)
                 return typeof(int).Name;
