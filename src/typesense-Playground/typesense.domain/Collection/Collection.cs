@@ -34,7 +34,7 @@ namespace typesense.domain.Collection
 
         public async Task<bool> DeleteCollection<T>()
         {
-            var indexName = typeof(T).Name.Pluralize().ToSnakeCase(); ;
+            var indexName = typeof(T).Name.Pluralize().ToSnakeCase();
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("X-TYPESENSE-API-KEY", "xyz");
             var response = await client.DeleteAsync($"http://localhost:8108/collections/{indexName}");
@@ -43,7 +43,7 @@ namespace typesense.domain.Collection
 
         public async Task<IndexSchema?> GetCollection<T>()
         {
-            var indexName = typeof(T).Name.Pluralize().ToSnakeCase(); ;
+            var indexName = typeof(T).Name.Pluralize().ToSnakeCase();
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("X-TYPESENSE-API-KEY", "xyz");
             var response = await client.GetAsync($"http://localhost:8108/collections/{indexName}");

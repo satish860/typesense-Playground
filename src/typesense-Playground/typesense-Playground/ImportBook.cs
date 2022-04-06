@@ -7,8 +7,8 @@ using typesense.domain.Attributes;
 
 namespace typesense_Playground
 {
-    [Document(DefaultSortingField= "ratings_count")]
-    public class Book
+    [Document(DefaultSortingField = "rating_count")]
+    internal class ImportBook2
     {
         public int Id { get; set; }
 
@@ -17,7 +17,7 @@ namespace typesense_Playground
         [Facet]
         public string[] Authors { get; set; }
 
-        public DateTime PublicationYear { get; set; }
+        public DateTime PublicationYears { get; set; }
 
         public int RatingsCount { get; set; }
 
