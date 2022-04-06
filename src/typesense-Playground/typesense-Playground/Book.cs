@@ -10,7 +10,7 @@ namespace typesense_Playground
     [Document(DefaultSortingField= "ratings_count")]
     public class Book
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Title { get; set; }
 
