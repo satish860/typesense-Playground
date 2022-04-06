@@ -15,7 +15,7 @@ namespace typesense.domain.Tests.Documents
         {
             IDocumentTransfer documentTransfer = new DocumentTransfer();
             var documents = await documentTransfer.Export<Book>("books");
-            Assert.Equal(9976,documents.Count());  
+            Assert.Equal(9979,documents.Count());  
         }
     }
 }
