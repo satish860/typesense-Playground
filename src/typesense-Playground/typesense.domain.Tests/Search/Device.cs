@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace typesense.domain.Tests.Search
 {
-    internal class Device
+    public class Device
     {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
+
     }
 }

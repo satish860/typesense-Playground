@@ -58,6 +58,42 @@ namespace typesense.domain.Documents
             return updatedDocument;
         }
 
+        public async Task<IEnumerable<Result<T>>> InsertMultipleDocument<T>(IEnumerable<T> documents, string indexName)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("X-TYPESENSE-API-KEY", "xyz");
+            List<string> contents = new List<string>();
+            foreach (var document in documents)
+            {
+                var documentcontent = JsonSerializer.Serialize(document
+                , new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = SnakeCaseNamingPolicy.Instance,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                });
+                contents.Add(documentcontent);
+            }
+            var content = new StringContent(string.Join(Environment.NewLine, contents), Encoding.UTF8, "appilcation/json");
+            var response = await client
+                .PostAsync($"http://localhost:8108/collections/{indexName}/documents/import?action=upsert", content);
+            response.EnsureSuccessStatusCode();
+            var responsecontent = await response.Content.ReadAsByteArrayAsync();
+            var insertedresponse = Encoding.UTF8.GetString(responsecontent);
+            List<Result<T>> results = new List<Result<T>>();
+            foreach (var item in insertedresponse.Split(Environment.NewLine))
+            {
+               var result = JsonSerializer.Deserialize<Result<T>>(item
+                , new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = SnakeCaseNamingPolicy.Instance,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                });
+                results.Add(result);
+            }
+            
+            return results;
+        }
+
         public async Task<T> Update<T>(T document, string id, string indexName)
         {
             HttpClient client = new HttpClient();

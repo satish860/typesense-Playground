@@ -17,13 +17,13 @@ namespace typesense.domain.Tests.Documents
             Collection.TypeSenseCollection typeSenseCollection = new Collection.TypeSenseCollection();
             var indexSchema = await typeSenseCollection.GetCollection<Device>();
             if (indexSchema.Name == null)
-                indexSchema= await typeSenseCollection.CreateCollection<Device>();
+                indexSchema = await typeSenseCollection.CreateCollection<Device>();
             var device = await document.CreateDocument<Device>(new Device
             {
                 FriendlyName = "Hello World",
                 Id = Guid.NewGuid().ToString(),
                 ModelName = "Windows"
-            },indexSchema.Name);
+            }, indexSchema.Name);
             Assert.NotNull(device);
         }
 
@@ -78,7 +78,7 @@ namespace typesense.domain.Tests.Documents
                 Id = id,
                 ModelName = "Windows"
             }, indexSchema.Name);
-           var  updatedDevice = await document.Update<Device>(new Device
+            var updatedDevice = await document.Update<Device>(new Device
             {
                 ModelName = "Windows RT"
             }, id, indexSchema.Name);
@@ -102,6 +102,23 @@ namespace typesense.domain.Tests.Documents
             }, indexSchema.Name);
             var updatedDevice = await document.GetById<Device>(id, indexSchema.Name);
             Assert.Equal(id, updatedDevice.Id);
+        }
+
+        [Fact]
+        public async Task Should_be_Able_to_Insert_All_Documents()
+        {
+            ITypeSenseDocument document = new TypesenseDocument();
+            Collection.TypeSenseCollection typeSenseCollection = new Collection.TypeSenseCollection();
+            var indexSchema = await typeSenseCollection.GetCollection<Device>();
+            if (indexSchema.Name == null)
+                indexSchema = await typeSenseCollection.CreateCollection<Device>();
+            var id = Guid.NewGuid().ToString();
+            var device = await document.InsertMultipleDocument<Device>(new[]{ new Device
+            {
+                FriendlyName = "Hello World",
+                Id = id,
+                ModelName = "Windows"
+            }}, indexSchema.Name);
         }
     }
 }
