@@ -28,6 +28,7 @@ namespace typesense.domain.Collection
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("X-TYPESENSE-API-KEY", "xyz");
             var response = await client.PostAsync("http://localhost:8108/collections", content);
+            var responseJson = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
             return schema;
         }

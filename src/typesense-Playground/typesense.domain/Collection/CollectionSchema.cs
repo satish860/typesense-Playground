@@ -49,12 +49,22 @@ namespace typesense.domain
             foreach (var item in type.GetProperties())
             {
                 Field field = new Field();
-                field.Name = item.Name.ToSnakeCase();
-                field.Type = GetTypeSenseProperty(item.PropertyType.Name).ToLower();
-                var attribute = item.GetCustomAttributes(typeof(FacetAttribute), false).FirstOrDefault();
-                if (attribute != null)
-                    field.Facet = true;
-                fields.Add(field);
+                var nonIndexableAttribute = item.GetCustomAttributes(typeof(NonIndexableAttribute), false).FirstOrDefault();
+                if (nonIndexableAttribute == null)
+                {
+                    field.Name = item.Name.ToSnakeCase();
+                    if (Nullable.GetUnderlyingType(item.PropertyType) != null)
+                    {
+                        var underlyingType = Nullable.GetUnderlyingType(item.PropertyType);
+                        field.Type = GetTypeSenseProperty(underlyingType.Name).ToLower();
+                    }
+                    else
+                        field.Type = GetTypeSenseProperty(item.PropertyType.Name).ToLower();
+                    var attribute = item.GetCustomAttributes(typeof(FacetAttribute), false).FirstOrDefault();
+                    if (attribute != null)
+                        field.Facet = true;
+                    fields.Add(field);
+                }
             }
             schema.Fields = fields;
             return schema;

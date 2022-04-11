@@ -21,7 +21,7 @@ namespace typesense.domain.Tests
             IndexSchema schema = curator.GetFields(new IndexSchema());
             Assert.Equal(6, schema.Fields.Count());
             Assert.True(schema.Fields.First(p => p.Name == "authors").Facet);
-            Assert.Equal("Int32", schema.Fields.First(p => p.Name == "publication_years").Type);
+            Assert.Equal("int32", schema.Fields.First(p => p.Name == "publication_years").Type);
         }
     }
 }

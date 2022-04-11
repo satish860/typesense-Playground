@@ -15,5 +15,7 @@ namespace typesense.domain
         public bool? Facet { get; set; }
 
         public bool? Index { get; set; }
+
+        public bool Optional { get; set; } = true;
     }
 }
